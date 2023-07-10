@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>민음사 출판그룹</title>
+  <link rel="icon" type="image/png" href="./images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="./css/font_reset.css">
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/sub.css">
+  <link rel="stylesheet" href="./css/media_qurey_main.css" />
+  <link rel="stylesheet" href="./css/media_qurey_sub.css" />
+  <link rel="stylesheet" href="./css/magnific-popup.css">
+  <script src="js/jquery-3.6.4.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.js" type="text/javascript"></script>
+  <script>
+    $(function () {
+
+      const topBtn = $('.top_btn') // (1) 탑버튼 애니메이션  효과
+      topBtn.click(function () {
+        $('html, body').stop().animate({
+          scrollTop: 0
+        }, 1000);
+      }); // topBtn
+
+      $('.nav').mouseover(function () { // (2) lnb 풀다운 메뉴
+        $('.list_wrap').stop().animate({
+          height: "320px",
+        }, 100);
+      });
+      $('.nav').mouseout(function () {
+        $('.list_wrap').stop().animate({
+          height: "0px"
+        }, 100);
+      }); // lnb hover
+
+      let tabLabel = $('ul .fold_sheet label'); // (3) 탭 메뉴 애니메이션 효과
+      let sheetLi = $('ul .fold_sheet');
+      let foldBox = $('.fold_box')
+      let index = 0;
+
+      tabLabel.click(function () {
+
+        index = $(this).parent().index()
+        sheetLi.removeClass('sheet_on');
+        sheetLi.eq(index).addClass('sheet_on');
+        foldBox.removeClass('box_on');
+        foldBox.eq(index).addClass('box_on');
+      }); // tab sheet click 
+
+
+      const eleHeigth = $('.frame ul li').innerHeight(); // (4) footer 공지사항 배너 슬라이드 
+      let state = false;
+      let playOn = false;
+      let direction = 'top';
+      let bannerAuto
+
+
+      function play() {
+        if (!playOn) {
+          playOn = true
+          bannerAuto = setInterval(function () {
+            if (direction === 'top') {
+              $('.up').click()
+            } else {
+              $('.down').click()
+            };
+          }, 2000)
+        };
+        if (playOn) {
+          $('.frame li a').mouseover(function () {
+            stop()
+          });
+        };
+      }; // play()
+
+      function stop() {
+        if (playOn) {
+          playOn = false
+          clearInterval(bannerAuto)
+        };
+
+        $('.frame li a').mouseout(function () {
+          play()
+        });
+
+        $('.frame li a').click(function () {
+          Location.href
+        });
+      }; // stop()
+
+      function top() {
+        stop()
+        direction = 'top'
+        $('.frame ul').animate({
+          top: eleHeigth * -1
+        }, 500, function () {
+          $(this).children('li:first').insertAfter($(this).children(
+            'li:last')); // 
+          $(this).css('top', 0);
+          state = false
+          play();
+        });
+      }; // top()
+
+      function bottom() {
+        stop()
+        direction = 'bottom'
+        $('.frame ul li:last').insertBefore($('.frame ul li:first'))
+        $('.frame ul').css('up', eleHeith * -1)
+        $('.frame ul').animate({
+          top: 0
+        }, 500, function () {
+          state = false
+          play()
+        })
+      }; // bottom()
+
+      $('.up').click(function () {
+        if (!state) {
+          state = true
+          top()
+        }
+      })
+
+      $('.down').click(function () {
+        if (!state) {
+          state = true
+          bottom()
+        }
+      })
+
+      $('.stop').click(function () {
+        stop()
+      })
+
+      $('.play').click(function () {
+        play()
+      })
+
+      $('.play').click() // banner_slide_event
+
+      $('.more_btn').click(function () { // (5) 숨겨진 content 보여지는 애니메이션
+        $('.more_content').stop().animate({
+          height: "100%"
+        }, )
+        $('.nw').stop().animate({
+          opacity: 1
+        }, 500)
+
+        $(this).hide()
+      })
+
+      $('.close_btn').click(function () {
+        $('.more_content').stop().animate({
+          height: "0px"
+        }, 500)
+        $('.nw').stop().animate({
+          opacity: 0
+        })
+        $('.more_btn').show()
+      }) // more_btn_event
+
+      /* $('.more_btn').on('click',function(){
+        $('.more_content').fadeToggle(1000)
+      }) */
+
+
+    }); // jQurey
+  </script>
+</head>
+
+<body>
+  <input type="button" value="클릭" id="popup_btn" onclick="go_popup()">
+  <div id="popup" class="Pstyle">
+    <span class="b-close"><img src="./images/close.png" alt="close"></span>
+    <div class="content_p" style="height: auto; width: auto;">
+      <img class="popup_img" src="./images/popup.png" alt="popup" width="95%" height="auto">
+    </div>
+  </div>
+  <div class="wing_banner">
+    <ul class="list_icon">
+      <li><a href="sub.html">민음사</a></li>
+      <li>황금가지</li>
+      <li>사이언스북스</li>
+      <li>세미콜론</li>
+      <li>민음인</li>
+      <li>판미동</li>
+      <li>반비</li>
+      <li>펄프</li>
+      <li>비룡소</li>
+    </ul>
+  </div>
+  <div class="head_outer">
+    <header class="header" id="top">
+      <h1><a href="index.html">민음사 출판그룹</a></h1>
+      <form action="#" class="src_bar">
+        <input type="text" id="src" placeholder="통합검색" />
+        <span><i class="fas fa-search"></i></span>
+      </form>
+      <div class="login"><span>로그인</span><span>회원가입</span></div>
+    </header>
+    <!-- end header -->
+    <nav class="nav">
+      <ul class="lnb">
+        <li class="lnb_menu">
+          <p>그룹소개</p>
+        </li>
+        <li class="lnb_menu">
+          <p>커뮤니티</p>
+        </li>
+        <li class="lnb_menu">
+          <p>이벤트</p>
+        </li>
+        <li class="lnb_menu">
+          <p>DB·자료실</p>
+        </li>
+      </ul>
+      <div class="list_wide">
+        <div class="list_wrap">
+          <ul class="lnb_list p01">
+            <li>브랜드 소개</li>
+            <li>인사말</li>
+            <li>역사</li>
+            <li>채용정보</li>
+            <li>거래처 안내</li>
+            <li>오시는 길</li>
+          </ul>
+          <ul class="lnb_list p02">
+            <li>소식&공지</li>
+            <li>보도자료</li>
+            <li>연재</li>
+            <li>이벤트</li>
+          </ul>
+          <ul class="lnb_list p03">
+            <li>원고 투고</li>
+            <li>2차 저작권가이드</li>
+            <li>1:1 문의</li>
+          </ul>
+          <ul class="lnb_list p04">
+            <li>출판그룹 도서 DB</li>
+            <li>출판그룹 작가 DB</li>
+            <li>도서목록 다운로드</li>
+            <li>무료배포 자료실</li>
+            <li>동영상 자료실</li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="header_bg">
+      <div>
+        <picture>
+          <source media="(min-width:769px)" srcset="./images/header_bg01_1920.jpg" />
+          <source media="(min-width:601px)" srcset="./images/header_bg01_640.jpg" />
+          <source media="(min-width:320px)" srcset="./images/header_bg01_640.jpg" />
+          <img src="" alt="" style="width: 100%" />
+        </picture>
+      </div>
+      <div>
+        <picture>
+          <source media="(min-width:769px)" srcset="./images/header_bg02_1920.jpg" />
+          <source media="(min-width:601px)" srcset="./images/header_bg02_640.jpg" />
+          <source media="(min-width:320px)" srcset="./images/header_bg02_640.jpg" />
+          <img src="" alt="" style="width: 100%" />
+        </picture>
+      </div>
+      <div>
+        <picture>
+          <source media="(min-width:769px)" srcset="./images/header_bg03_1920.jpg" />
+          <source media="(min-width:601px)" srcset="./images/header_bg03_640.jpg" />
+          <source media="(min-width:320px)" srcset="./images/header_bg03_640.jpg" />
+          <img src="" alt="" style="width: 100%" />
+        </picture>
+      </div>
+    </div> <!-- end header_bg -->
+  </div>
+  <!-- end header_outer -->
+  <div class="content">
+    <h2 class="tit_group">그룹 소개</h2>
+    <section class="group">
+      <div class="track">
+        <ul>
+          <li>
+            <div class="group_img">
+              <a href="sub.html"><img src="./images/group_01.jpg" alt="민음사" /></a>
+            </div>
+            <p><a href="sub.html">민음사</a></p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_02.jpg" alt="황금가지" />
+            </div>
+            <p>황금가지</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_03.jpg" alt="사이언스북스" />
+            </div>
+            <p>사이언스북스</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_04.jpg" alt="세미콜론" />
+            </div>
+            <p>세미콜론</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_05.jpg" alt="민음인" />
+            </div>
+            <p>민음인</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_06.jpg" alt="판미동" />
+            </div>
+            <p>판미동</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_07.jpg" alt="반비" />
+            </div>
+            <p>반비</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_08.jpg" alt="펄프" />
+            </div>
+            <p>펄프</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_09.jpg" alt="비룡소" />
+            </div>
+            <p>비룡소</p>
+          </li>
+        </ul>
+      </div>
+      <div class="track_clone">
+        <ul>
+          <li>
+            <div class="group_img">
+              <a href="sub.html"><img src="./images/group_01.jpg" alt="민음사" /></a>
+            </div>
+            <p><a href="sub.html">민음사</a></p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_02.jpg" alt="황금가지" />
+            </div>
+            <p>황금가지</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_03.jpg" alt="사이언스북스" />
+            </div>
+            <p>사이언스북스</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_04.jpg" alt="세미콜론" />
+            </div>
+            <p>세미콜론</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_05.jpg" alt="민음인" />
+            </div>
+            <p>민음인</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_06.jpg" alt="판미동" />
+            </div>
+            <p>판미동</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_07.jpg" alt="반비" />
+            </div>
+            <p>반비</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_08.jpg" alt="펄프" />
+            </div>
+            <p>펄프</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_09.jpg" alt="비룡소" />
+            </div>
+            <p>비룡소</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- end grouup -->
+    <section class="group group_clone">
+      <div class="track">
+        <ul>
+          <li>
+            <div class="group_img">
+              <a href="sub.html"><img src="./images/group_01.jpg" alt="민음사" /></a>
+            </div>
+            <p><a href="sub.html">민음사</a></p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_02.jpg" alt="황금가지" />
+            </div>
+            <p>황금가지</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_03.jpg" alt="사이언스북스" />
+            </div>
+            <p>사이언스북스</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_04.jpg" alt="세미콜론" />
+            </div>
+            <p>세미콜론</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_05.jpg" alt="민음인" />
+            </div>
+            <p>민음인</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_06.jpg" alt="판미동" />
+            </div>
+            <p>판미동</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_07.jpg" alt="반비" />
+            </div>
+            <p>반비</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_08.jpg" alt="펄프" />
+            </div>
+            <p>펄프</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_09.jpg" alt="비룡소" />
+            </div>
+            <p>비룡소</p>
+          </li>
+        </ul>
+      </div>
+      <div class="track_clone">
+        <ul>
+          <li>
+            <div class="group_img">
+              <a href="sub.html"><img src="./images/group_01.jpg" alt="민음사" /></a>
+            </div>
+            <p><a href="sub.html">민음사</a></p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_02.jpg" alt="황금가지" />
+            </div>
+            <p>황금가지</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_03.jpg" alt="사이언스북스" />
+            </div>
+            <p>사이언스북스</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_04.jpg" alt="세미콜론" />
+            </div>
+            <p>세미콜론</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_05.jpg" alt="민음인" />
+            </div>
+            <p>민음인</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_06.jpg" alt="판미동" />
+            </div>
+            <p>판미동</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_07.jpg" alt="반비" />
+            </div>
+            <p>반비</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_08.jpg" alt="펄프" />
+            </div>
+            <p>펄프</p>
+          </li>
+          <li>
+            <div class="group_img">
+              <img src="./images/group_09.jpg" alt="비룡소" />
+            </div>
+            <p>비룡소</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- end group_clone -->
+    <h2 class="tit_new_report">출간 보도자료<small>+ 더보기</small></h2>
+    <section class="new_report">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./images/book_news_01.jpg" alt="민음사" />
+            <h6>돌연한 출발</h6>
+            <p>민음사</p>
+            <span>2023-04-07</span>
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/book_news_02.jpg" alt="세미콜론" />
+            <h6>여기는 '공덕동 식물유치원'입니다.</h6>
+            <p>세미콜론</p>
+            <span>2023-04-05</span>
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/book_news_03.jpg" alt="반비" />
+            <h6>갈대속의 영원</h6>
+            <p>반비</p>
+            <span>2023-03-20</span>
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/book_news_04.jpg" alt="황금가지" />
+            <h6>세상의 경계에서</h6>
+            <p>황금가지</p>
+            <span>2023-02-28</span>
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/book_news_05.jpg" alt="사이언스북스" />
+            <h6>다윈의 사도들</h6>
+            <p>사이언스북스</p>
+            <span>2023-02-12</span>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+    <!-- end new_report -->
+    <section class="new_report_wide">
+      <div class="new_report_wide_inner">
+        <div class="new_contents">
+          <div class="new_wrap">
+            <div class="new_left">
+              <div class="new_img">
+                <img src="./images/book_news_01.jpg" alt="" />
+              </div>
+            </div>
+            <div class="new_txt">
+              <h6>돌연한 출발</h6>
+              <span>민음사</span>
+              <span>2023-04-07</span>
+              <p>
+                “한 권의 책은 우리 안의 얼어붙은 바다를 깨는 도끼여야 해.”<br />
+                - 프란츠 카프카<br />
+                출구 없는 삶, 재앙처럼 닥친 초조함의 세계에서 구원을 꿈꾼
+                이방인<br />
+                20세기 문학의 징후, 프란츠 카프카의 명작 단편 서른두 편<br />
+                카프카의 사인, 친필 원고와 편지글, 드로잉 화보<br />
+                전영애 역자의 새 번역 단편들과 카프카 오마주 시 ‘카프카, 나의
+                카프카’<br />
+                편집자의 색다른 리뷰 ‘카프카와 카프카들’ 수록
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="new_contents">
+          <div class="new_wrap">
+            <div class="new_left">
+              <div class="new_img">
+                <img src="./images/book_news_02.jpg" alt="" />
+              </div>
+            </div>
+            <div class="new_txt">
+              <h6>여기는 '공덕동 식물유치원'입니다.</h6>
+              <span>세미콜론</span>
+              <span>2023-04-05</span>
+              <p>
+                버림받은 식물들이 재탄생하는 곳!<br />
+                재개발 단지에 이주민이 버리고 간 식물을 구조해 분양하는<br />
+                ‘공덕동 식물유치원’의 유기식물 구조 프로젝트!<br />
+                “인간이라는 생물을 분류하는 기준은 뛰어난 지능이나 기술력, 모험심
+                같은 것이 아닌,<br />
+                타인과 타생물종을 향해 갖는 책임감이며, 그 마음을 행동으로 다할
+                때<br />
+                우리는 비로소 인간다워진다는 사실을 이 책의 저자가 몸소
+                보여줍니다.”<br />
+                이소영(식물세밀화가, 『식물의 책』저자)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="more">
+          <div class="more_btn"><img src="./images/plus.png" alt="plus"></div>
+          <div class="more_content">
+            <div class="new_contents">
+              <div class="new_wrap nw">
+                <div class="new_left">
+                  <div class="new_img">
+                    <img src="./images/book_news_03.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="new_txt">
+                  <h6>갈대속의 영원</h6>
+                  <span>반비</span>
+                  <span>2023-03-20</span>
+                  <p>
+                    출간 직후 18개월 연속 베스트셀러!<br />
+                    전 세계 독자들의 마음을 사로잡은 ‘책에 대한 찬가’<br />
+                    작가는 인간이 만들어낸 가장 오래된 발명품 중 하나인 책을 둘러싼
+                    질문들을 하나하나 탐색해간다. 책은 언제 발명되었을까, 우리의
+                    지식과 사상과 이야기가 글로 쓰이기 시작하며 인류로서의 우리는
+                    어떻게 변신했을까, 어떤 역동이 책을 전파하려 애썼고 또 파괴하려
+                    애썼을까? “책 사냥꾼의 모험을 이어가려는 노력” 속에서, 독자들은
+                    이미 알고 있다고 생각했던 역사의 놀라운 면모를 만나고, 우리 세계의
+                    토대를 쌓아 올리고 “타인과 만날 수 있는 거대한 공간”을 열어주며
+                    “서로 모르는 사람들 사이에 보이지 않는 사슬을”(511쪽) 만들어낸
+                    책의 천일야화로 빠져들게 될 것이다.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="new_contents">
+              <div class="new_wrap nw">
+                <div class="new_left">
+                  <div class="new_img">
+                    <img src="./images/book_news_04.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="new_txt">
+                  <h6>세상의 경계에서</h6>
+                  <span>황금가지</span>
+                  <span>2023-02-28</span>
+                  <p>
+                    “380개의 지구 가운데 무려 372개의 지구에서 나는 죽었다.<br />
+                    아니, 이제는 373개로 늘어났다.”<br />
+                    특권과 불평등, 정체성과 소속감을 탐구하는 멀티버스 SF<br />
+                    평행우주로의 이동이 가능해진 세상을 무대로 계급과 정체성의 문제를
+                    파고든 SF 『세상의 경계에서』가 황금가지에서 출간되었다. 최고의
+                    데뷔소설에 수여되는 콤턴 크룩상을 수상하며 저자인 미카이아 존슨을
+                    일약 SF 계의 떠오르는 신성으로 주목받게 한 이 작품에서 그려지는
+                    차원 이동에는 여타 멀티버스물과 비교해 색다른 한 가지 설정이 있다.
+                    바로 다른 세계의 또 다른 자신이 이미 ‘죽어 있어야만’ 한다는 전제
+                    조건으로, 주인공은 빈곤한 도시 출신의 유색인 여성이기에 여러
+                    지구에서 높은 확률로 사망한 최적의 ‘횡단자’다. 『세상의
+                    경계에서』는 이 복잡다단한 인물의 비밀과 다중우주에 얽힌 음모를
+                    반전에 반전을 거듭해 드러내며 손에 땀을 쥐게 하는 전개를 선보인다.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="new_contents">
+              <div class="new_wrap nw">
+                <div class="new_left">
+                  <div class="new_img">
+                    <img src="./images/book_news_05.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="new_txt">
+                  <h6>다원의 사도들</h6>
+                  <span>사이언스북스</span>
+                  <span>2023-02-12</span>
+                  <p>
+                    왜 다윈이 중요한가?<br />
+                    최재천이 묻고 세계가 답하다!<br />
+                    다윈의 열두 제자들과 함께한 동행은 나름 평생 다윈을 연구하며
+                    살았다고 자부하는 내게 잊을 수 없이 귀한 배움을 선사했다. 이 책을
+                    만드는 과정에서 내가 경험했듯이 이 책을 읽는 독자들 역시 다윈의
+                    열두 제자들을 차례로 만나다 보면 어느덧 그들의 손에 이끌려 다윈의
+                    아미에 입적하게 될 것이다. 그런 변화에 애써 항거할 필요는 없어
+                    보인다. 한 세기 반에 걸친 혹독한 담금질과 막강한 아미의 팬덤 문화
+                    덕택에 다윈의 이론은 이제 우리가 하는 거의 모든 학문과 사회 활동
+                    분야에 깊숙이 스며들었다. 다윈은 이제 현대인의 필수 교양이다.
+                    -본문에서<br />
+                    전 세계, 전 역사 어디서도 볼 수 없는<br />
+                    최재천이기에 가능했던 만남!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="close_btn"><img src="./images/minus.png" width="100%" height="100%" alt="close"></div>
+          </div>
+        </div>
+      </div>
+      <div class="new_report_tab">
+        <!-- <h1>출간 보도자료</h1> -->
+        <input id="radio1" type="radio" name="css-tabs" checked>
+        <input id="radio2" type="radio" name="css-tabs">
+        <input id="radio3" type="radio" name="css-tabs">
+        <input id="radio4" type="radio" name="css-tabs">
+        <input id="radio5" type="radio" name="css-tabs">
+        <div id="tabs">
+          <label id="tab1" for="radio1">민음사</label>
+          <label id="tab2" for="radio2">반비</label>
+          <label id="tab3" for="radio3">세미콜론</label>
+          <label id="tab4" for="radio4">황금가지</label>
+          <label id="tab5" for="radio5">사이언스북스</label>
+        </div>
+        <div id="content">
+          <section id="content1">
+            <div class="new_wrap">
+              <div class="new_left">
+                <div class="new_img">
+                  <img src="./images/book_news_01.jpg" alt="" />
+                </div>
+              </div>
+              <div class="new_txt">
+                <h6>돌연한 출발</h6>
+                <span>민음사</span>
+                <span>2023-04-07</span>
+                <p>
+                  “한 권의 책은 우리 안의 얼어붙은 바다를 깨는 도끼여야 해.”<br />
+                  - 프란츠 카프카<br />
+                  출구 없는 삶, 재앙처럼 닥친 초조함의 세계에서 구원을 꿈꾼
+                  이방인<br />
+                  20세기 문학의 징후, 프란츠 카프카의 명작 단편 서른두 편<br />
+                  카프카의 사인, 친필 원고와 편지글, 드로잉 화보<br />
+                  전영애 역자의 새 번역 단편들과 카프카 오마주 시 ‘카프카, 나의
+                  카프카’<br />
+                  편집자의 색다른 리뷰 ‘카프카와 카프카들’ 수록
+                </p>
+              </div>
+            </div>
+          </section>
+          <section id="content2">
+            <div class="new_wrap">
+              <div class="new_left">
+                <div class="new_img">
+                  <img src="./images/book_news_02.jpg" alt="" />
+                </div>
+              </div>
+              <div class="new_txt">
+                <h6>여기는 '공덕동 식물유치원'입니다.</h6>
+                <span>세미콜론</span>
+                <span>2023-04-05</span>
+                <p>
+                  버림받은 식물들이 재탄생하는 곳!<br />
+                  재개발 단지에 이주민이 버리고 간 식물을 구조해 분양하는<br />
+                  ‘공덕동 식물유치원’의 유기식물 구조 프로젝트!<br />
+                  “인간이라는 생물을 분류하는 기준은 뛰어난 지능이나 기술력, 모험심
+                  같은 것이 아닌,<br />
+                  타인과 타생물종을 향해 갖는 책임감이며, 그 마음을 행동으로 다할
+                  때<br />
+                  우리는 비로소 인간다워진다는 사실을 이 책의 저자가 몸소
+                  보여줍니다.”<br />
+                  이소영(식물세밀화가, 『식물의 책』저자)
+                </p>
+              </div>
+            </div>
+          </section>
+          <section id="content3">
+            <div class="new_wrap">
+              <div class="new_left">
+                <div class="new_img">
+                  <img src="./images/book_news_03.jpg" alt="" />
+                </div>
+              </div>
+              <div class="new_txt">
+                <h6>갈대속의 영원</h6>
+                <span>반비</span>
+                <span>2023-03-20</span>
+                <p>
+                  출간 직후 18개월 연속 베스트셀러!<br />
+                  전 세계 독자들의 마음을 사로잡은 ‘책에 대한 찬가’<br />
+                  작가는 인간이 만들어낸 가장 오래된 발명품 중 하나인 책을 둘러싼
+                  질문들을 하나하나 탐색해간다. 책은 언제 발명되었을까, 우리의
+                  지식과 사상과 이야기가 글로 쓰이기 시작하며 인류로서의 우리는
+                  어떻게 변신했을까, 어떤 역동이 책을 전파하려 애썼고 또 파괴하려
+                  애썼을까? “책 사냥꾼의 모험을 이어가려는 노력” 속에서, 독자들은
+                  이미 알고 있다고 생각했던 역사의 놀라운 면모를 만나고, 우리 세계의
+                  토대를 쌓아 올리고 “타인과 만날 수 있는 거대한 공간”을 열어주며
+                  “서로 모르는 사람들 사이에 보이지 않는 사슬을”(511쪽) 만들어낸
+                  책의 천일야화로 빠져들게 될 것이다.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section id="content4">
+            <div class="new_wrap">
+              <div class="new_left">
+                <div class="new_img">
+                  <img src="./images/book_news_04.jpg" alt="" />
+                </div>
+              </div>
+              <div class="new_txt">
+                <h6>세상의 경계에서</h6>
+                <span>황금가지</span>
+                <span>2023-02-28</span>
+                <p>
+                  “380개의 지구 가운데 무려 372개의 지구에서 나는 죽었다.<br />
+                  아니, 이제는 373개로 늘어났다.”<br />
+                  특권과 불평등, 정체성과 소속감을 탐구하는 멀티버스 SF<br />
+                  평행우주로의 이동이 가능해진 세상을 무대로 계급과 정체성의 문제를
+                  파고든 SF 『세상의 경계에서』가 황금가지에서 출간되었다. 최고의
+                  데뷔소설에 수여되는 콤턴 크룩상을 수상하며 저자인 미카이아 존슨을
+                  일약 SF 계의 떠오르는 신성으로 주목받게 한 이 작품에서 그려지는
+                  차원 이동에는 여타 멀티버스물과 비교해 색다른 한 가지 설정이 있다.
+                  바로 다른 세계의 또 다른 자신이 이미 ‘죽어 있어야만’ 한다는 전제
+                  조건으로, 주인공은 빈곤한 도시 출신의 유색인 여성이기에 여러
+                  지구에서 높은 확률로 사망한 최적의 ‘횡단자’다. 『세상의
+                  경계에서』는 이 복잡다단한 인물의 비밀과 다중우주에 얽힌 음모를
+                  반전에 반전을 거듭해 드러내며 손에 땀을 쥐게 하는 전개를 선보인다.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section id="content5">
+            <div class="new_wrap">
+              <div class="new_left">
+                <div class="new_img">
+                  <img src="./images/book_news_05.jpg" alt="" />
+                </div>
+              </div>
+              <div class="new_txt">
+                <h6>다원의 사도들</h6>
+                <span>사이언스북스</span>
+                <span>2023-02-12</span>
+                <p>
+                  왜 다윈이 중요한가?<br />
+                  최재천이 묻고 세계가 답하다!<br />
+                  다윈의 열두 제자들과 함께한 동행은 나름 평생 다윈을 연구하며
+                  살았다고 자부하는 내게 잊을 수 없이 귀한 배움을 선사했다. 이 책을
+                  만드는 과정에서 내가 경험했듯이 이 책을 읽는 독자들 역시 다윈의
+                  열두 제자들을 차례로 만나다 보면 어느덧 그들의 손에 이끌려 다윈의
+                  아미에 입적하게 될 것이다. 그런 변화에 애써 항거할 필요는 없어
+                  보인다. 한 세기 반에 걸친 혹독한 담금질과 막강한 아미의 팬덤 문화
+                  덕택에 다윈의 이론은 이제 우리가 하는 거의 모든 학문과 사회 활동
+                  분야에 깊숙이 스며들었다. 다윈은 이제 현대인의 필수 교양이다.
+                  -본문에서<br />
+                  전 세계, 전 역사 어디서도 볼 수 없는<br />
+                  최재천이기에 가능했던 만남!
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <!-- end new_report_wide -->
+    <div class="ev_banner">
+      <img src="./images/ev_bannner_01.png" alt="이벤트01" />
+      <!-- <picture>
+                <source media="(min-width:769px)" srcset="./images/">
+                <source media="(min-width:601px)" srcset="./images/">
+                <source media="(min-width:320px)" srcset="./images/ev_banner">
+                <img src="./images/ev_bannner.png" alt="이벤트" style="width: 100%;">
+            </picture> -->
+    </div>
+    <!-- end ev_banner_01 -->
+    <section class="humanities">
+      <h2>한편의 인문학 <small>+ 더보기</small></h2>
+      <div class="box_wrap">
+        <div class="box_01">
+          <h5>#165 거짓말 게임</h5>
+          <div class="box_01_side">
+            <div>
+              <p>“힘의 위계가 만드는 말할 수 없는 것들의 문법을 제대로 이해할 때 우리는 칭찬을 듣고 그렇지 않을 때 총살당한다.
+                설마 그렇게까지 할까 반문하고 싶다면 당신은 조직에서 누군가로부터 이미 암묵적 총살을 당했을지 모르니 주변을 잘 둘러보길 바란다.
+                <span>우리는 이러한 고맥락의 충성과 반역의 게임을 수행하는 것을 눈치 있는 사회생활, 즉 정치라고 부른다.
+                  수영이 분투했던 것처럼 말이다."</span>
+              </p>
+              <img src="./images/sheet01.jpg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="box_02">
+          <div class="box_02_1">
+            <div class="box_03 con1">
+              <h5>#164<br />물방앗간 젊은이에게 무슨 일이 일어날까</h5>
+            </div>
+            <div class="box_03 con2">
+              <h5>#163<br />여행길에 한 공부</h5>
+            </div>
+          </div>
+          <div class="box_02_1">
+            <div class="box_03 con3 btn1">
+              <h5>당신의 이야기를 들려주세요 :)</h5>
+            </div>
+            <div class="box_03 con4 btn1">
+              <h5>구독하기 <i class="fas fa-arrow-right"></i></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="humanities_wide">
+        <ul>
+          <li>
+            <h1>"한편을 같이 읽어요."</h1>
+          </li>
+          <li>
+            <p>책보다 짧고 논문보다 쉬운<br />한편의 인문학</p>
+          </li>
+          <li>
+            <h5>정기구독 신청하기</h5>
+          </li>
+        </ul>
+        <ul>
+          <!-- <input type="radio" id="fold01" name="fold" checked>
+          <input type="radio" id="fold02" name="fold">
+          <input type="radio" id="fold03" name="fold"> -->
+          <li class="fold_sheet01 fold_sheet sheet_on">
+            <div class="fold_sheet01_box fold_box box_on">
+              <h3>#165 거짓말 게임</h3>
+              <h4><img src="./images/editor.png" alt="">아 다르고 어 다른 사정을 탐구하는 편집자</h4>
+              <p class="sheet_txt">오늘은 따끈따끈한 신간 <strong>《릿터》</strong>를 읽어 봐요.<br />
+                이번 주제가 ‘최신 금기’라고 해서 부랴부랴 펼쳐 봤죠.
+                동물과의 사랑이라는 희대의 주제를 다룬 하마노 지히로의 글이 실려 있어서 가슴이 벅찼구요.
+                최고의 정치 에세이 『우리를 바꾸는 우리』의 저자인 조무원 연구자의 글을 탐독했습니다.
+                얼마 전 종영한 드라마 「사랑의 이해」에 대한 유머 있고 예리한 비평에 표지 그림처럼 불꽃에 휩싸였어요.
+                아름다운 가곡 다음으로 불타는 《릿터》 표지라니!
+                삼선 슬리퍼를 신고 안광을 빛내는 표지 속 인물은 하루 종일 무언가에 대해 토론하고도 못다 한 이야기가 남아 절대 가지 말라는 신호를 보내는 듯해요.
+                아아, 눈 마주쳤다…….<br />
+                요즘은 조직 생활뿐 아니라 일상 대부분에서 거짓말 게임을 하고 있다는 느낌도 들어요.
+                아니, 거짓말 게임조차 하기 싫어서 그냥 웃고 넘기게 된달까요?
+                이미상 소설가의 인터뷰에 나온 ‘트리거 눌린다’와 같은 표현을 보고 들을 때면 아주 가끔 ‘나도 나도’ 싶고 대체로 자주 ‘싫다’는 생각이 들거든요.
+                마냥 웃음으로 긴장을 풀 수 없다면 거짓말하기보다 나의 무지나 약함을 70퍼센트 희석한 버전으로 내보이고 싶어요.
+                그 지점에서 몇 번 더 반응을 주고받으며 위험한, 불타는, 끝없는 대화로 나아갈 수 있겠죠.
+              </p>
+              <div class="sheet_bg">
+                <img src="./images/sheet01.jpg" alt="">
+              </div>
+            </div>
+            <label for="fold01" class="label_01 fold_label">
+              <span class="rotate">
+                <p class="label_p">2023-04-19</p>
+              </span>
+            </label>
+          </li>
+          <li class="fold_sheet02 fold_sheet">
+            <div class="fold_sheet02_box fold_box">
+              <h3>#163 여행길에 한 공부</h3>
+              <h4 class="h4_02"><img src="./images/editor02.png" alt="">함께하는 공부라면 행복한 편집자</h4>
+              <p class="sheet_txt">시에서 시로 이어지는 지난 편지는 어떻게 읽으셨나요?<br />
+                이번 편지에서 소개해 드리고 싶은 작품도 시예요.<br />
+                19세기 독일 시인 빌헬름 뮐러의 연작시 <strong>『아름다운 물방앗간의 아가씨』</strong>에서 시냇물 소리를 따라 방랑하던 젊은이는 물방앗간에서 아름다운 아가씨를 보고 첫눈에
+                사랑에 빠집니다.
+                시냇물이 졸졸 흐르고 둥근 달이 떠 있고 꽃들이 피었는데 젊은이의 마음은 기쁨과 초조와 호기심과 슬픔으로 요동치고 있어요.
+                『아름다운 물방앗간의 아가씨』는 뮐러의 시에 곡을 붙인 슈베르트의 가곡으로 유명한데요.
+                친구 집에 놀러갔던 슈베르트가 책상 위에 놓인 뮐러의 시집이 너무 마음에 들어서 허락도 안 받고 집에 가져가 곡을 써 버렸다고 해요.
+                한편 편집부는 지난 주말 통영국제음악당에서 마티아스 괴르네가 부르고 세르게이 바바얀이 피아노를 연주하는 가곡 무대를 함께 보았어요.
+                조용한 데에서 혼자 읽는 시도 좋지만, 역시 함께 보고 들으면 서로의 감상을 나눌 수 있어서 좋아요.<br />
+                『아름다운 물방앗간의 아가씨』를 함께 읽어 볼까요?
+              </p>
+              <div class="sheet_bg">
+                <img src="./images/sheet02.jpg" alt="">
+              </div>
+            </div>
+            <label for="fold02" class="label_02 fold_label">
+              <span class="rotate">
+                <p class="label_p">2023-04-12</p>
+              </span>
+            </label>
+          </li>
+          <li class="fold_sheet03 fold_sheet">
+            <div class="fold_sheet03_box fold_box">
+              <h3>#163 여행길에 한 공부</h3>
+              <h4><img src="./images/editor.png" alt="">아 다르고 어 다른 사정을 탐구하는 편집자</h4>
+              <p class="sheet_txt">저는 긴 휴가를 다녀왔어요.<br />이름하여 10년 근속휴가라 해서…… 민음사에서 일한 지 10년이 되었다는 것입니다.
+                비행기 대신 기차를 타고 한국을 여행하면서 잠도 자고 책도 읽고 했는데요.
+                돌아와 책상 앞에 앉아서 생각해 보니 그것도 다 공부하는 일이었던 것 같아요.
+                무슨 여행 중에 공부냐 하면 내 마음에 대한 공부……. 휴가를 떠나기 전에는 딱 이 시의 프루프록과 같은 상태였죠.<br />
+                “저녁과 아침과 오후 일들을 다 알고 있기 때문에,/ 내가 커피 스푼으로 내 삶을 재어 왔기 때문에”.
+                제목조차 <strong>『황무지(The Waste Land)』</strong>인 엘리엇 시선을 펼치면 산산이 흩어진 현대인의 마음을 마주 볼 수 있어요.
+                이제 돌이킬 수 없는 4월이니, “사월은 가장 잔인한 달”이라는 유명한 시구가 있는 이 시집은 사무실에 앉아 있는 오늘도 펼쳐들고 싶네요.
+              </p>
+              <div class="sheet_bg">
+                <img src="./images/sheet03.jpg" alt="">
+              </div>
+            </div>
+            <label for="fold03" class="label_03 fold_label">
+              <span class="rotate">
+                <p class="label_p">2023-04-05</p>
+              </span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </section> <!-- end humanities -->
+    <div class="ev_banner ev02">
+      <img src="./images/ev_bannner_02.png" alt="이벤트02" />
+      <!-- <picture>
+                <source media="(min-width:769px)" srcset="./images/">
+                <source media="(min-width:601px)" srcset="./images/">
+                <source media="(min-width:320px)" srcset="./images/ev_banner">
+                <img src="./images/ev_bannner.png" alt="이벤트" style="width: 100%;">
+            </picture> -->
+    </div>
+    <!-- end ev_banner_02 -->
+    <section class="event">
+      <h2 class="tit">이벤트<small>+ 더보기</small></h2>
+      <div class="event_wrap">
+        <div class="event_img">
+          <img src="./images/event01.png" alt="event">
+        </div>
+        <div class="event_img">
+          <img src="./images/event02.png" alt="event">
+        </div>
+        <div class="event_img wide">
+          <img src="./images/event03.png" alt="event">
+        </div>
+        <div class="event_img wide">
+          <img src="./images/event04.png" alt="event">
+        </div>
+        <div class="event_more">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </section>
+    <div class="info_wrap">
+      <section class="copyright">
+        <h2>제 2차 저작권 가이드</h2>
+        <p class="copyright_txt">
+          민음사 출판 그룹에서 출간된 국내 창작 저작물/해외 번역물 도서에 관심을
+          가져 주셔서 감사합니다.<br />
+          사용하시고자 하는 민음사 출판 그룹의 상기 도서들은 모두 저작권 보호를
+          받는 저작물입니다.<br />
+          따라서 사용을 희망하시는 경우는 저작권자와의 협의에 따라 허락을 받으신
+          이후 사용하실 수 있음을 알려드립니다.
+        </p>
+        <p class="copyright_txt_wide">민음사 출판 그룹에서 출간된 국내 창작 저작물/해외 번역물 도서는 저작권자와의 협의에 따라 허락을 받으신
+          이후 사용하실 수 있음을 알려드립니다.</p>
+        <p class="p_txt">문의 및 사용 절차 알아보기</p>
+        <div>
+          <span>국내 저작물</span>
+          <span>해외 저작물</span>
+        </div>
+      </section>
+      <section class="submission">
+        <h2>원고투고</h2>
+        <div class="half">
+          <div class="frame"></div>
+          <p>
+            민음사 출판그룹은 참신한 아이디어와 역량있는 원고를 기다리고
+            있습니다.
+            <span>내 작품 투고하기 <i class="fas fa-long-arrow-alt-right"></i></span>
+          </p>
+          <div>
+            <img src="./images/letter.gif" alt="" />
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- end content -->
+  <div class="footer_wide">
+    <footer class="footer">
+      <div class="move_to">
+        <div class="sns_icon">
+          <a href="https://www.instagram.com/minumsa_books/" class="insta"><img src="./images/icon_insta_over.png"
+              alt="인스타그램" /></a>
+          <a href="https://blog.naver.com/minumworld" class="naver"><img src="./images/icon_naver_over.png"
+              alt="네이버" /></a>
+          <a href="https://twitter.com/minumsa_books" class="twitter"><img src="./images/icon_twitter_over.png"
+              alt="트위터" /></a>
+          <a href="https://www.facebook.com/MinumsaBooks" class="facebook"><img src="./images/icon_facebook_over.png"
+              alt="페이스북" /></a>
+        </div>
+        <form action="#">
+          <select name="family" id="family" onchange="if(this.value) location.href=(this.value);">
+            <option>민음사 출판그룹 사이트</option>
+            <option value="site1">민음사</option>
+            <option value="site2">황금가지</option>
+            <option value="site3">사이언스북스</option>
+            <option value="site4">세미콜론</option>
+            <option value="site5">민음인</option>
+            <option value="site6">판미동</option>
+            <option value="site7">반비</option>
+            <option value="site8">펄프</option>
+            <option value="site9">비룡소</option>
+          </select>
+        </form>
+      </div>
+      <ul class="footer_mobile">
+        <li>
+          <span class="bar">회원약관</span><span class="bar">개인정보처리방침</span><span class="bar">문의</span><span>ENGLISH</span>
+        </li>
+        <li>
+          <span class="bar">(주)민음북스</span><span>대표이사: 박상준</span>
+        </li>
+        <li>사업자등록번호: 211-88-41803</li>
+        <li>통신판매업 신고번호: 제2010-서울강남-00971호</li>
+        <li>주소: 서울시 강남구 신사동 506 강남출판문화센터 5층</li>
+        <li>새주소: 서울시 강남구 도산대로 1길 62 5층</li>
+        <li>
+          <span class="bar">전화: 02-515-2000</span><span>webmaster@minumsa.com</span>
+        </li>
+        <li>Copyright Ⓒ Minumsa Publishing Group</li>
+      </ul>
+      <div class="top_btn">
+        <a href="#top">
+          <img src="./images/arrow-up.png" alt="탑버튼">
+        </a>
+      </div>
+      <div class="notice">
+        <div class="frame">
+          <ul>
+            <li><a href="!#">[공지] 개인정보처리방침 개정 시행 안내</a></li>
+            <li><a href="!#">제9회 [세계의 문학 신인상] 소설 부문 수상 소감 ― 김세희</a></li>
+            <li><a href="!#">제9회 [세계의 문학 신인상] 시 부문 수상 소감 ― 임정민</a></li>
+            <li><a href="!#">이기호 『차남들의 세계사』, 제47회 한국일보문학상 수상</a></li>
+            <li><a href="!#">제33회 [김수영 문학상] 발표</a></li>
+          </ul>
+        </div>
+        <div class="notice_btn">
+          <div class="up">up</div>
+          <div class="play">play</div>
+          <div class="stop">stop</div>
+          <div class="down">down</div>
+        </div> <!-- end notice -->
+      </div> <!-- end top_btn -->
+    </footer>
+  </div>
+  <!-- end footer_wide -->
+  <input type="checkbox" id="nav" checked />
+  <div class="nav_sheet">
+    <label for="nav" class="close"><i class="fas fa-times"></i></label>
+    <div class="member">
+      <span>로그인</span>
+      <span>회원가입</span>
+    </div>
+    <div class="group_s">
+      <ul>
+        <li><a href="sub.html">민음사</a></li>
+        <li>황금가지</li>
+        <li class="wid">사이언스북스</li>
+      </ul>
+      <ul>
+        <li>세미콜론</li>
+        <li>민음인</li>
+        <li>판미동</li>
+      </ul>
+      <ul>
+        <li>반비</li>
+        <li>펄프</li>
+        <li>비룡소</li>
+      </ul>
+    </div>
+    <div class="nav_menu">
+      <input type="radio" id="tab01" name="tab" checked />
+      <input type="radio" id="tab02" name="tab" />
+      <input type="radio" id="tab03" name="tab" />
+      <input type="radio" id="tab04" name="tab" />
+      <div class="label_wrap">
+        <label for="tab01" class="tab_btn1">그룹소개</label>
+        <label for="tab02" class="tab_btn2">뉴스</label>
+        <label for="tab03" class="tab_btn3">고객지원</label>
+        <label for="tab04" class="tab_btn4">DB·자료실</label>
+      </div>
+      <div class="list_sheet">
+        <ul class="list01">
+          <li>브랜드 소개</li>
+          <li>인사말</li>
+          <li>역사</li>
+          <li>채용정보</li>
+          <li>거래처 안내</li>
+          <li>오시는 길</li>
+        </ul>
+        <ul class="list02">
+          <li>소식&공지</li>
+          <li>보도자료</li>
+          <li>연재</li>
+          <li>이벤트</li>
+          <li>행사 스케치</li>
+        </ul>
+        <ul class="list03">
+          <li>원고 투고</li>
+          <li>2차 저작권가이드</li>
+          <li>1:1 문의</li>
+        </ul>
+        <ul class="list04">
+          <li>출판그룹 도서</li>
+          <li>출판그룹 작가</li>
+          <li>도서목록 다운로드</li>
+          <li>무료배포 자료실</li>
+          <li>동영상 자료실</li>
+        </ul>
+      </div>
+    </div>
+    <p>민음사 출판그룹 Copyright Ⓒ Minumsa Publishing Group</p>
+  </div>
+  <!-- end nav_sheet -->
+  <div class="fixed_menu">
+    <label for="nav" class="label">
+      <div><img src="./images/hamburger.png" alt="메뉴" /></div>
+      <span>전체메뉴</span>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/star.png" alt="이벤트" /></div>
+      <span>이벤트</span>
+    </label>
+    <label for="#" class="label">
+      <a href="#top">
+        <div><img src="./images/home.png" alt="홈" /></div>
+        <span>홈</span>
+      </a>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/user.png" alt="마이페이지" /></div>
+      <span>마이페이지</span>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/customer-service.png" alt="문의" /></div>
+      <span>1:1문의</span>
+    </label>
+  </div>
+  <!-- end fixed_menu -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="./js/jquery.bpopup.min.js"></script>
+  <script> // (1) 팝업 플러그인
+    $('#popup').bPopup();
+  </script>
+  <!-- <script type="text/javascript">
+    function go_popup() {
+      $('#popup').bPopup();
+    };
+  </script> -->
+  <script>
+    // (2) 슬라이드 슬릭 플러그인
+    $(document).ready(function () {
+      $(".header_bg").slick({
+        autoplay: true,
+        autoplaySpeed: 4000,
+        fade: true,
+      });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    // (3) 슬라이드 스와이퍼 플러그인
+    let swiper = new Swiper(".mySwiper", {
+      slidesPerView: 2,
+      spaceBetween: 15,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      autoplay: true,
+    });
+  </script>
+</body>
+
+</html>

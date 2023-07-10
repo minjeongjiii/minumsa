@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="./images/favicon-16x16.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/sub.css">
+  <link rel="stylesheet" href="css/media_qurey_sub.css" />
+  <title>민음사 출판그룹</title>
+  <script src="./js/jquery-3.6.4.min.js"></script>
+  <script>
+    $(function () {
+
+      const topBtn = $('.top_btn')
+      topBtn.click(function () {
+        $('html, body').stop().animate({
+          scrollTop: 0
+        }, 1000);
+      }); // topBtn
+
+      $('.nav').mouseover(function () {
+        $('.list_wrap').stop().animate({
+          height: "320px"
+        }, 100);
+      });
+      $('.nav').mouseout(function () {
+        $('.list_wrap').stop().animate({
+          height: "0px"
+        }, 100);
+      });
+
+      const eleHeigth = $('.frame_sub ul li').innerHeight();
+      let state = false;
+      let playOn = false;
+      let direction = 'top';
+      let bannerAuto
+
+
+      function play() {
+        if (!playOn) {
+          playOn = true
+          bannerAuto = setInterval(function () {
+            if (direction === 'top') {
+              $('.up_sub').click()
+            } else {
+              $('.down_sub').click()
+            };
+          }, 2000)
+        };
+        if (playOn) {
+          $('.frame_sub li a').mouseover(function () {
+            stop()
+          });
+        };
+      };
+
+      function stop() {
+        if (playOn) {
+          playOn = false
+          clearInterval(bannerAuto)
+        };
+
+        $('.frame_sub li a').mouseout(function () {
+          play()
+        });
+
+        $('.frame_sub li a').click(function () {
+          Location.href
+        });
+      };
+
+      function top() {
+        stop()
+        direction = 'top'
+        $('.frame_sub ul').animate({
+          top: eleHeigth * -1
+        }, 500, function () {
+          $(this).children('li:first').insertAfter($(this).children(
+            'li:last')); // 
+          $(this).css('top', 0);
+          state = false
+          play();
+        });
+      };
+
+      function bottom() {
+        stop()
+        direction = 'bottom'
+        $('li:last').insertBefore($('li:first'))
+        $('.frame_sub ul').css('up', eleHeith * -1)
+        $('.frame_sub ul').animate({
+          top: 0
+        }, 500, function () {
+          state = false
+          play()
+        })
+      };
+
+      $('.up_sub').click(function () {
+        if (!state) {
+          state = true
+          top()
+        }
+      })
+
+      $('.down_sub').click(function () {
+        if (!state) {
+          state = true
+          bottom()
+        }
+      })
+
+      $('.stop_sub').click(function () {
+        stop()
+      })
+
+      $('.play_sub').click(function () {
+        play()
+      })
+
+      $('.play_sub').click() // notice 
+
+    });
+  </script>
+</head>
+
+<body>
+  <div class="wing_banner">
+    <ul class="list_icon">
+      <li>민음사</li>
+      <li>황금가지</li>
+      <li>사이언스북스</li>
+      <li>세미콜론</li>
+      <li>민음인</li>
+      <li>판미동</li>
+      <li>반비</li>
+      <li>펄프</li>
+      <li>비룡소</li>
+    </ul>
+  </div>
+  <div class="head_outer">
+    <header class="header" id="top">
+      <h1><a href="index.html">민음사 출판그룹</a></h1>
+      <form action="#" class="src_bar">
+        <input type="text" id="src" placeholder="통합검색" />
+        <span><i class="fas fa-search"></i></span>
+      </form>
+      <div class="login"><span>로그인</span><span>회원가입</span></div>
+    </header>
+    <!-- end header -->
+    <nav class="nav">
+      <ul class="lnb">
+        <li class="lnb_menu">
+          <p>출판사 소개</p>
+        </li>
+        <li class="lnb_menu">
+          <p>도서</p>
+        </li>
+        <li class="lnb_menu">
+          <p>문학상</p>
+        </li>
+        <li class="lnb_menu">
+          <p>커뮤니티</p>
+        </li>
+      </ul>
+      <div class="list_wrap">
+        <ul class="lnb_list p01">
+          <li>민음사 소개</li>
+          <li>민음사 이벤트</li>
+          <li>역사</li>
+          <li>채용정보</li>
+          <li>거래처 안내</li>
+          <li>오시는 길</li>
+        </ul>
+        <ul class="lnb_list p02">
+          <li>전체도서</li>
+          <li>베스트셀러</li>
+          <li>카테고리</li>
+          <li>전자책 목록</li>
+          <li>독자 리뷰</li>
+          <li>민음사&동네서점</li>
+        </ul>
+        <ul class="lnb_list p03">
+          <li>오늘의 문학상</li>
+          <li>김수영 문학상</li>
+        </ul>
+        <ul class="lnb_list p04">
+          <li>멤버십 안내</li>
+          <li>멤버십 문의</li>
+          <li>민음 북클럽</li>
+          <li>릿터 정기구독</li>
+          <li>한편 정기구독</li>
+          <li>민음 북샵</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- end header_outer -->
+  <div class="content">
+    <div class="sub_depth">
+      <ul class="path">
+        <li><a href="index.html"><img src="./images/path_home.png" alt=""></a></li>
+        <li><i class="fas fa-chevron-right"></i></li>
+        <li><a href="sub.html">민음사</a></li>
+      </ul>
+      <div class="notice_sub">
+        <div class="frame_sub">
+          <ul class="notice_sub_txt">
+            <li><a href="!#">[공지] 개인정보처리방침 개정 시행 안내</a></li>
+            <li><a href="!#">제9회 [세계의 문학 신인상] 소설 부문 수상 소감 ― 김세희</a></li>
+            <li><a href="!#">제9회 [세계의 문학 신인상] 시 부문 수상 소감 ― 임정민</a></li>
+            <li><a href="!#">이기호 『차남들의 세계사』, 제47회 한국일보문학상 수상</a></li>
+            <li><a href="!#">제33회 [김수영 문학상] 발표</a></li>
+          </ul>
+        </div>
+        <div class="notice_sub_btn">
+          <div class="up_sub">up</div>
+          <div class="play_sub">play</div>
+          <div class="stop_sub">stop</div>
+          <div class="down_sub">down</div>
+        </div>
+      </div>
+    </div>
+    <div class="share">
+      <section class="best_seller">
+        <h2 class="tit">도서 베스트<small>+ 더보기</small></h2>
+        <div class="best_wrap">
+          <ul class="book_best_01">
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_01.jpg" alt="best">
+              </div>
+              <p class="book_tit">데미안</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_02.jpg" alt="best">
+              </div>
+              <p class="book_tit">동물농장</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_03.jpg" alt="best">
+              </div>
+              <p class="book_tit">참을 수 없는<br />존재의 가벼움</p>
+            </li>
+          </ul>
+          <ul class="book_best_02">
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_04.jpg" alt="best">
+              </div>
+              <p class="book_tit">1984</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_05.jpg" alt="best">
+              </div>
+              <p class="book_tit">한국이 싫어서</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_best_06.jpg" alt="best">
+              </div>
+              <p class="book_tit">호밀밭의 파수꾼</p>
+            </li>
+          </ul>
+        </div>
+        <div class="share_btn">
+          <img src="./images/share.png" alt="share">
+          <span>공유하기</span>
+        </div>
+      </section>
+      <section class="new_release">
+        <h2 class="tit">도서 신간<small>+ 더보기</small></h2>
+        <div class="new_wrap">
+          <ul class="book_new_01">
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_01.jpg" alt="new">
+              </div>
+              <p class="book_tit">조용한 미국인</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_02.jpg" alt="best">
+              </div>
+              <p class="book_tit">등고선없는<br />지도를 쥐고</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_03.jpg" alt="best">
+              </div>
+              <p class="book_tit">조금 전의 심장</p>
+            </li>
+          </ul>
+          <ul class="book_best_02">
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_04.jpg" alt="best">
+              </div>
+              <p class="book_tit">전쟁과 평화가<br />있는 내 부엌</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_05.jpg" alt="best">
+              </div>
+              <p class="book_tit">릿터 41호</p>
+            </li>
+            <li>
+              <div class="cover">
+                <img src="./images/book_new_06.jpg" alt="best">
+              </div>
+              <p class="book_tit">돌연한 출발</p>
+            </li>
+          </ul>
+        </div>
+        <div class="share_btn">
+          <img src="./images/share.png" alt="share">
+          <span>공유하기</span>
+        </div>
+      </section>
+    </div>
+    <section class="event">
+      <h2 class="tit">이벤트<small>+ 더보기</small></h2>
+      <div class="event_wrap">
+        <div class="event_img">
+          <picture>
+            <source media="(min-width:320px)" srcset="./images/event01_mobile.png">
+            <source media="(min-width:601px)" srcset="./images/event01_mobile.png">
+            <source media="(min-width:769px)" srcset="./images/event01.png">
+            <img src="" width="100%" alt="event">
+        </div>
+        <div class="event_img">
+          <picture>
+            <source media="(min-width:320px)" srcset="./images/event02_mobile.png">
+            <source media="(min-width:601px)" srcset="./images/event02_mobile.png">
+            <source media="(min-width:769px)" srcset="./images/event02.png">
+            <img src="" width="100%" alt="event">
+          </picture>
+        </div>
+        <div class="event_img wide">
+          <picture>
+            <source media="(min-width:320px)" srcset="./images/event03_mobile.png">
+            <source media="(min-width:601px)" srcset="./images/event03_mobile.png">
+            <source media="(min-width:769px)" srcset="./images/event03.png">
+            <img src="" width="100%" height="100%" alt="event">
+          </picture>
+        </div>
+        <div class="event_img wide">
+          <picture>
+            <source media="(min-width:320px)" srcset="./images/event04_mobile.png">
+            <source media="(min-width:601px)" srcset="./images/event04_mobile.png">
+            <source media="(min-width:769px)" srcset="./images/event03.png">
+            <img src="" width="100%" alt="event">
+          </picture>
+        </div>
+        <div class="event_more">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </section>
+    <div class="youtube mobile">
+      <div class="iframe_wrap"><iframe src="https://www.youtube.com/embed/a1dclXg0AgY" width="100%" height="250px"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe></div>
+    </div>
+    <section class="blog mobile">
+      <h2 class="tit">블로그<small>+ 바로가기</small></h2>
+      <ul>
+        <li>
+          <p>[하루에 한 문장] 정우용, 「장서합기」</p><span>23-04-23</span>
+        </li>
+        <li>
+          <p>[하루에 한 문장] 월천꾼의 노래</p><span>23-04-22</span>
+        </li>
+        <li>
+          <p>민음북클럽이 뭐예요? 2023 민음북클럽 FAQ</p><span>23-04-21</span>
+        </li>
+        <li>
+          <p>『읽는 사람』의 말들 ― '좋아하는 책'에 대한 인터뷰</p><span>23-04-21</span>
+        </li>
+        <li>
+          <p>[하루에 한 문장] 『중용』</p><span>23-04-21</span>
+        </li>
+        <li>
+          <p>2023 민음북클럽 혜택 ─ 온라인 독서 모임 & 민음 커뮤니티 & 패밀리데이</p><span>23-04-20</span>
+        </li>
+      </ul>
+    </section>
+    <section class="youtube_blog">
+
+      <input type="radio" id="youtube01" name="youtube" checked>
+      <input type="radio" id="youtube02" name="youtube">
+      <input type="radio" id="youtube03" name="youtube">
+
+
+      <ul class="youtube_01">
+        <h2 class="tit">유튜브</h2>
+        <li class="y_chk01"><iframe width="100%" height="250px" src="https://www.youtube.com/embed/Q9F4bheS43g"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe></li>
+        <li class="y_chk02"><iframe width="100%" height="250px" src="https://www.youtube.com/embed/r-3KbIA2N8s"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe></li>
+        <li class="y_chk03"><iframe width="100%" height="250px" src="https://www.youtube.com/embed/SOkhYWXvZsU"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe></li>
+        <div class="label_btn">
+          <label for="youtube01" class="y_btn01"></label>
+          <label for="youtube02" class="y_btn02"></label>
+          <label for="youtube03" class="y_btn03"></label>
+        </div>
+      </ul>
+      <input type="radio" id="blog01" name="blog" checked>
+      <input type="radio" id="blog02" name="blog">
+      <input type="radio" id="blog03" name="blog">
+      <ul class="blog_01">
+        <h2 class="tit">블로그</h2>
+        <li class="b_chk01">
+          <div class="blog_con">
+            <img src="./images/blog01.jpg" alt="blog">
+            <h6>[하루에 한 문장] 정우용, 「장서합기」</h6>
+            <p>책을 열고 성현과 마주하여 문답하라!</p>
+            <span>2023.04.23</span>
+          </div>
+          <div class="blog_con">
+            <img src="./images/blog02.jpg" alt="blog">
+            <h6>[하루에 한 문장] 월천꾼의 노래</h6>
+            <p>술렁술렁 흐르던 물도 소용돌이치고 용을 쓰네.
+              해는 져서 어두운데 월천꾼 부르는 소리로구나.
+              깊고 어둔 밤 흐르는 물은 일만 짐승이 우짖는 듯.</p>
+            <span>2023.04.22</span>
+          </div>
+        </li>
+        <li class="b_chk02">
+          <div class="blog_con">
+            <img src="./images/blog03.png" alt="blog">
+            <h6>민음북클럽이 뭐예요? 2023 민음북클럽 FAQ</h6>
+            <p>자주 들어오는 질문들을 모았습니다! 2023 민음북클럽 FAQ</p>
+            <span>2023.04.21</span>
+          </div>
+          <div class="blog_con">
+            <img src="./images/blog04.png" alt="blog">
+            <h6>『읽는 사람』의 말들 ― '좋아하는 책'에 대한 인터뷰</h6>
+            <p>허윤선 인터뷰집 『읽는 사람』은 문학잡지 《릿터》 인터뷰 코너에서 배우, 뮤지션, 영화감독, 작가 등 34명의 아티스트와 ‘독서’를 주제로 나눈 대화를 엮은 책입니다.</p>
+            <span>2023.04.2</span>
+          </div>
+        </li>
+        <li class="b_chk03">
+          <div class="blog_con">
+            <img src="./images/blog05.jpg" alt="blog">
+            <h6>[하루에 한 문장] 『중용』</h6>
+            <p>말하기 전에 미리 생각해 두면 막힘없이 유창하고, 일하기 전에 미리 생각해 두면 일하기가 곤란하지 않으며, 실행하기 전에 미리 생각해 두면 후회하지 않게 되고, 인간의 도리를 실천하는
+              방법이 미리 준비되면 막히는 일이 없을 것이다.</p>
+            <span>2023.04.21</span>
+          </div>
+          <div class="blog_con">
+            <img src="./images/blog06.jpg" alt="blog">
+            <h6>2023 민음북클럽 혜택 ─ 온라인 독서 모임 & 민음 커뮤니티 & 패밀리데이</h6>
+            <p></p>
+            <span>2023.04.20</span>
+          </div>
+        </li>
+        <div class="label_btn">
+          <label for="blog01" class="b_btn01"></label>
+          <label for="blog02" class="b_btn02"></label>
+          <label for="blog03" class="b_btn03"></label>
+        </div>
+      </ul>
+    </section>
+    <section class="sub_contents">
+      <input type="radio" id="sub_tab01" name="sub_tab" checked>
+      <input type="radio" id="sub_tab02" name="sub_tab">
+      <input type="radio" id="sub_tab03" name="sub_tab">
+      <input type="radio" id="sub_tab04" name="sub_tab">
+      <input type="radio" id="sub_tab05" name="sub_tab">
+      <div class="tab_wrap">
+        <ul class="tab_sheet">
+          <li class="sub_tab_sheet_01">
+            <div class="youtube_tab">
+              <iframe width="100%" height="420px" src="https://www.youtube.com/embed/Q9F4bheS43g" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+          </li>
+          <li class="sub_tab_sheet_02">
+            <div class="blog_top">
+              <div class="blog_box bb01">
+                <h5>[하루에 한 문장] 2023.04.23 정우용, 「장서합기」</h5>
+                <p class="blog_txt">"책을 열고 성현과 마주하여 문답하라!"</p>
+              </div>
+              <div class="blog_box bb02">
+                <h5>[하루에 한 문장] 2023.04.22 월천꾼의 노래</h5>
+                <p class="blog_txt">"술렁술렁 흐르던 물도 소용돌이치고 용을 쓰네.
+                  해는 져서 어두운데 월천꾼 부르는 소리로구나.
+                  깊고 어둔 밤 흐르는 물은 일만 짐승이 우짖는 듯."</p>
+              </div>
+            </div>
+            <div class="blog_bottom">
+              <div class="blog_box bb03">
+                <h5>민음북클럽이 뭐예요? 2023 민음북클럽 FAQ</h5>
+                <p class="blog_txt">자주 들어오는 질문들을 모았습니다!<br /> 2023 민음북클럽 FAQ</p>
+              </div>
+              <div class="blog_box bb04">
+                <h5>『읽는 사람』의 말들 ― '좋아하는 책'에 대한 인터뷰</h5>
+                <p class="blog_txt">허윤선 인터뷰집 『읽는 사람』은 문학잡지 《릿터》 인터뷰 코너에서 배우, 뮤지션, 영화감독, 작가 등 34명의 아티스트와 ‘독서’를 주제로 나눈 대화를
+                  엮은 책입니다.</p>
+              </div>
+            </div>
+          </li>
+          <li class="sub_tab_sheet_03">
+            <div class="book_club">
+              <img src="./images/bookclub.png" alt="">
+              <div class="book_club_left">
+                <img src="./images/bookclub_logo.png" alt="">
+                <p>로그인</p>
+              </div>
+            </div>
+          </li>
+          <li class="sub_tab_sheet_04">
+            <div class="book_shop_top">
+              <img src="./images/book_shop_bg.png" alt="">
+              <span>전체상품 보기 <i class="fas fa-long-arrow-alt-right"></i></span>
+            </div>
+            <div class="book_shop_bottom">
+              <div><img src="./images/item.png" alt=""></div>
+              <div><img src="./images/item_02.png" alt=""></div>
+              <div><img src="./images/item_03.png" alt=""></div>
+              <div><img src="./images/item_04.png" alt=""></div>
+              <div><img src="./images/item_05.png" alt=""></div>
+            </div>
+          </li>
+          <li class="sub_tab_sheet_05">
+            <h1>동네서점 EVENT & ORDOR</h1>
+            <div class="book_store_top">
+              <div class="bs_ev">
+                <h5>이벤트 기간: 2023.01.01 ~ 04.31</h5>
+                <p>[민음사] 2023 인생일력 종이봉투 신청 페이지</p>
+                <span>진행중</span>
+              </div>
+              <div class="bs_ev">
+                <h5>이벤트 기간: 2023.01.01 ~ 04.31</h5>
+                <p>[민음사] 2023 인생일력 재고 미소진 동네서점 홍보</p>
+                <span>진행중</span>
+              </div>
+              <div class="bs_ev">
+                <h5>이벤트 기간: 2022.12.22 ~ 12.28</h5>
+                <p>[민음사] 세계문학전집 400권 출간 기념!</p>
+                <span>종료</span>
+              </div>
+            </div>
+            <div class="book_store_bottom">
+              <p class="order">
+                민음사와 함께하는 동네서점 파트너를 위한 공간입니다.<br />
+                로그인 후 본 페이지에서 ‘서점 거래처 등록’ 하시면 이용이 가능합니다.<br />
+                주문의 경우 현매 거래 기준이며, 관리자 최종 승인 후 확정 금액을 확인하실 수 있습니다.<br />
+                기존 거래가 없었던 서점의 경우 등록 후 꼭 담당자에게 연락 부탁 드립니다.<br />
+                e-mail : archo86@minumsa.com<br />
+                입금계좌 민음사 | 하나은행 | 139-910023-18004<br />
+              </p>
+              <img src="./images/order_img.png" alt="">
+              <div class="bs_login">
+                <span>로그인</span>
+                <span>회원가입</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="tab_list">
+          <label for="sub_tab01" class="sub_tab_list01">민음사 TV<br />유튜브</label>
+          <label for="sub_tab02" class="sub_tab_list02">민음사 BLOG</label>
+          <label for="sub_tab03" class="sub_tab_list03">민음사북클럽<br />커뮤니티</label>
+          <label for="sub_tab04" class="sub_tab_list04">민음북샵</label>
+          <label for="sub_tab05" class="sub_tab_list05">동네서점<br />EVENT & ORDOR</label>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end content -->
+  <div class="footer_wide">
+    <footer class="footer">
+      <div class="move_to">
+        <div class="sns_icon">
+          <a href="https://www.instagram.com/minumsa_books/" class="insta"><img src="./images/icon_insta_over.png"
+              alt="인스타그램" /></a>
+          <a href="https://blog.naver.com/minumworld" class="naver"><img src="./images/icon_naver_over.png"
+              alt="네이버" /></a>
+          <a href="https://twitter.com/minumsa_books" class="twitter"><img src="./images/icon_twitter_over.png"
+              alt="트위터" /></a>
+          <a href="https://www.facebook.com/MinumsaBooks" class="facebook"><img src="./images/icon_facebook_over.png"
+              alt="페이스북" /></a>
+        </div>
+        <form action="#">
+          <select name="family" id="family">
+            <option>민음사 출판그룹 사이트</option>
+            <option value="site1">민음사</option>
+            <option value="site2">황금가지</option>
+            <option value="site3">사이언스북스</option>
+            <option value="site4">세미콜론</option>
+            <option value="site5">민음인</option>
+            <option value="site6">판미동</option>
+            <option value="site7">반비</option>
+            <option value="site8">펄프</option>
+            <option value="site9">비룡소</option>
+          </select>
+        </form>
+      </div>
+      <ul class="footer_mobile">
+        <li>
+          <span class="bar">회원약관</span><span class="bar">개인정보처리방침</span><span class="bar">문의</span><span>ENGLISH</span>
+        </li>
+        <li>
+          <span class="bar">(주)민음북스</span><span>대표이사: 박상준</span>
+        </li>
+        <li>사업자등록번호: 211-88-41803</li>
+        <li>통신판매업 신고번호: 제2010-서울강남-00971호</li>
+        <li>주소: 서울시 강남구 신사동 506 강남출판문화센터 5층</li>
+        <li>새주소: 서울시 강남구 도산대로 1길 62 5층</li>
+        <li>
+          <span class="bar">전화: 02-515-2000</span><span>webmaster@minumsa.com</span>
+        </li>
+        <li>Copyright Ⓒ Minumsa Publishing Group</li>
+      </ul>
+      <div class="top_btn">
+        <a href="#top">
+          <img src="./images/arrow-up.png" alt="탑버튼">
+        </a>
+      </div> <!-- end top_btn -->
+    </footer>
+  </div>
+  <!-- end footer_wide -->
+  <input type="checkbox" id="nav" checked />
+  <div class="nav_sheet">
+    <label for="nav" class="close"><i class="fas fa-times"></i></label>
+    <div class="member">
+      <span>로그인</span>
+      <span>회원가입</span>
+    </div>
+    <div class="group_s">
+      <ul>
+        <li>민음사</li>
+        <li>황금가지</li>
+        <li class="wid">사이언스북스</li>
+      </ul>
+      <ul>
+        <li>세미콜론</li>
+        <li>민음인</li>
+        <li>판미동</li>
+      </ul>
+      <ul>
+        <li>반비</li>
+        <li>펄프</li>
+        <li>비룡소</li>
+      </ul>
+    </div>
+    <div class="nav_menu">
+      <input type="radio" id="tab01" name="tab" checked />
+      <input type="radio" id="tab02" name="tab" />
+      <input type="radio" id="tab03" name="tab" />
+      <input type="radio" id="tab04" name="tab" />
+      <div class="label_wrap">
+        <label for="tab01" class="tab_btn1">출판사 소개</label>
+        <label for="tab02" class="tab_btn2">도서</label>
+        <label for="tab03" class="tab_btn3">문학상</label>
+        <label for="tab04" class="tab_btn4">커뮤니티</label>
+      </div>
+      <div class="list_sheet">
+        <ul class="list01">
+          <li>민음사 소개</li>
+          <li>민음사 이벤트</li>
+        </ul>
+        <ul class="list02">
+          <li>전체 도서</li>
+          <li>베스트셀러</li>
+          <li>카테고리</li>
+          <li>전자책 목록</li>
+          <li>독자 리뷰</li>
+          <li>민음사&동네서점</li>
+        </ul>
+        <ul class="list03">
+          <li>오늘의 문학상</li>
+          <li>김수영 문학상</li>
+        </ul>
+        <ul class="list04">
+          <li>멤버십 안내</li>
+          <li>멤버십 문의</li>
+          <li>민음 북클럽</li>
+          <li>릿터 정기구독</li>
+          <li>한편 정기구독</li>
+          <li>민음 북샵</li>
+        </ul>
+      </div>
+    </div>
+    <p>민음사 출판그룹 Copyright Ⓒ Minumsa Publishing Group</p>
+  </div>
+  <!-- end nav_sheet -->
+  <div class="fixed_menu">
+    <label for="nav" class="label">
+      <div><img src="./images/hamburger.png" alt="메뉴" /></div>
+      <span>전체메뉴</span>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/star.png" alt="이벤트" /></div>
+      <span>이벤트</span>
+    </label>
+    <label for="#" class="label">
+      <a href="#top">
+        <div><img src="./images/home.png" alt="홈" /></div>
+        <span>홈</span>
+      </a>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/user.png" alt="마이페이지" /></div>
+      <span>마이페이지</span>
+    </label>
+    <label for="#" class="label">
+      <div><img src="./images/customer-service.png" alt="문의" /></div>
+      <span>1:1문의</span>
+    </label>
+  </div>
+  <!-- end fixed_menu -->
+</body>
+
+</html>
